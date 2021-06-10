@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R ugo+rx /0x01-shell_permissions
+sudo chmod -R +111 */
