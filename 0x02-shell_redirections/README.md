@@ -1,0 +1,1 @@
+I am now on week 2 of ALX. I hope all goes well. 
