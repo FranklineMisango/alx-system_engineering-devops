@@ -1,2 +1,2 @@
 #!/bin/bash
-echo ""
+cat -n +3 iacta
