@@ -1,1 +1,2 @@
-root@79fea1ec7e9d.563
+#!/bin/bash
+find ./* -type d -print | wc -l
