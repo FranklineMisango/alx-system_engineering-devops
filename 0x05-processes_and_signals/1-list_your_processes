@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-#pid of all running processes
-ps -auxf
