@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# Kills a process that contains a trap
-kill -9 "$(pgrep -f 'bash ./7-highlander')"
