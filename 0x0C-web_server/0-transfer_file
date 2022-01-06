@@ -1,4 +1,6 @@
-0x14-javascript-web_scraping
+#!/usr/bin/env bash
+
+# 0x14-javascript-web_scraping
 # Transfer file `file` to a server
 #scp /path/to/file username@a:/path/to/destination
 # Handcoded: scp -i ~/.ssh/id_rsa README.md ubuntu@35.196.161.104:/tmp
