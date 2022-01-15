@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # 0x14-javascript-web_scraping
 # Transfer file `file` to a server
 # scp /path/to/file username@a:/path/to/destination
