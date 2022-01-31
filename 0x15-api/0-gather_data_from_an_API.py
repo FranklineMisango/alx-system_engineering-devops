@@ -2,22 +2,30 @@
 """
 Gets data from an api
 """
-
-from sys import argv
+import re
 import requests
+import sys
+
+
+API = "https://jsonplaceholder.typicode.com"
+"""REST API url"""
 
 
 if __name__ == '__main__':
-    endpoint = "https://jsonplaceholder.typicode.com"
-    userId = argv[1]
-    user = requests.get(endpoint + "users/{}".
-                        format(userId), verify=False).json()
-    todo = requests.get(endpoint + "todos?userId={}".
-                        format(userId), verify=False).json()
-    completed_tasks = []
-    for task in todo:
-        if task.get('completed') is True:
-            completed_tasks.append(task.get('title'))
-    print("Employee {} is done with tasks({}/{}):".
-          format(user.get('name'), len(completed_tasks), len(todo)))
-    print("\n".join("\t {}".format(task) for task in completed_tasks))
+    if len(sys.argv) > 1:
+        if re.fullmatch(r'\d+', sys.argv[1]):
+            id = int(sys.argv[1])
+            user_res = requests.get('{}/users/{}'.format(API, id)).json()
+            todos_res = requests.get('{}/todos'.format(API)).json()
+            user_name = user_res.get('name')
+            todos = list(filter(lambda x: x.get('userId') == id, todos_res))
+            todos_done = list(filter(lambda x: x.get('completed'), todos))
+            print(
+                'Employee {} is done with tasks({}/{}):'.format(
+                    user_name,
+                    len(todos_done),
+                    len(todos)
+                )
+            )
+            for todo_done in todos_done:
+                print('\t {}'.format(todo_done.get('title')))
