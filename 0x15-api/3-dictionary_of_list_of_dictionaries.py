@@ -7,26 +7,26 @@ import json
 import requests
 
 
+API = "https://jsonplaceholder.typicode.com"
+"""REST API url"""
+
+
 if __name__ == '__main__':
-    users = requests.get("http://jsonplaceholder.typicode.com/users",
-                         verify=False).json()
-    userdict = {}
-    usernamedict = {}
-    for user in users:
-        uid = user.get("id")
-        userdict[uid] = []
-        usernamedict[uid] = user.get("username")
-    todo = requests.get("http://jsonplaceholder.typicode.com/todos",
-                        verify=False).json()
-
-    for task in todo:
-        taskdict = {
-            "task": task.get('title'),
-            "completed": task.get('completed'),
-            "username": usernamedict.get(uid)
-        }
-        uid = task.get("userId")
-
-        userdict.get(uid).append(taskdict)
-    with open("todo_all_employees.json", 'w') as jsonfile:
-        json.dump(userdict, jsonfile)
+    users_res = requests.get('{}/users'.format(API)).json()
+    todos_res = requests.get('{}/todos'.format(API)).json()
+    users_data = {}
+    for user in users_res:
+        id = user.get('id')
+        user_name = user.get('username')
+        todos = list(filter(lambda x: x.get('userId') == id, todos_res))
+        user_data = list(map(
+            lambda x: {
+                'username': user_name,
+                'task': x.get('title'),
+                'completed': x.get('completed')
+            },
+            todos
+        ))
+        users_data['{}'.format(id)] = user_data
+    with open('todo_all_employees.json', 'w') as file:
+        json.dump(users_data, file)
