@@ -45,5 +45,5 @@ backend www
 	balance roundrobin
     option httpclose
    	option forwardfor
-	server 35-web-01 34.75.10.160:80 check
-	server 35-web-01 35.231.86.187:80 check
+	server 657-web-01 35.196.161.104:80 check
+	server 657-web-02 34.139.242.176:80 check
